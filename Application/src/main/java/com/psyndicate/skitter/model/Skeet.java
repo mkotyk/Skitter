@@ -3,11 +3,26 @@ package com.psyndicate.skitter.model;
  /**
   * Model of a single Skeet message
   **/
-public class Skeet {
+public class Skeet implements Comparable {
     public static int MAX_SKEET_LENGTH = 160;
 
     private String text;
     private long timestamp;
+
+    public Skeet() {
+        text = null;
+        timestamp = -1;
+    }
+
+    public Skeet(String text) {
+        this.text = text;
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public Skeet(String text, long timestamp) {
+        this.text = text;
+        this.timestamp = timestamp;
+    }
 
     public void setText(String text) {
         if(text == null)
@@ -31,6 +46,11 @@ public class Skeet {
 
     public long getTimestamp() {
         return this.timestamp;
+    }
+
+    public int compareTo(Object other) {
+        Skeet otherSkeet = (Skeet) other;
+        return (int)(otherSkeet.timestamp - this.timestamp);
     }
 };
 

@@ -19,7 +19,7 @@ public class MockSkitterProviderTests extends TestCase {
         // Assert
         assertNotNull(token);
         assertTrue(token.validToTimestamp > System.currentTimeMillis());
-        assertTrue(token.userId == 1);
+        assertEquals(1, token.userId);
     }
 
     /**
@@ -49,5 +49,79 @@ public class MockSkitterProviderTests extends TestCase {
 
         // Assert
         assertTrue(System.currentTimeMillis() - startTime >= 500);
+    }
+
+    /**
+     * Ensure calling get skeets with no valid auth token fails.
+     **/
+    public void testGetSkeetsUnauth() throws Exception {
+        // Arrange
+        MockSkitterProvider skitterProvider = new MockSkitterProvider();
+        AuthToken token = new AuthToken(); // Blank token
+        boolean expectedResult = false;
+
+        // Act
+        try {
+            skitterProvider.getSkeets(token, System.currentTimeMillis());
+        }
+        catch(SkitterException ex) {
+            expectedResult = true;
+        }
+
+        // Assert
+        assertTrue(expectedResult);
+    }
+
+    /**
+     * Get all known skeets
+     **/
+    public void testGetSkeetsAll() throws Exception {
+        // Arrange
+        MockSkitterProvider skitterProvider = new MockSkitterProvider();
+        AuthToken token = skitterProvider.authenticate("user1", Utils.hashPassword("password1"));
+
+        // Act
+        List<Skeet> skeets = skitterProvider.getSkeets(token, 0);
+
+        // Assert
+        assertNotNull(skeets);
+        assertEquals(15, skeets.size());
+    }
+
+    /**
+     * Get new skeets
+     **/
+    public void testGetSkeetsNew() throws Exception {
+        // Arrange
+        MockSkitterProvider skitterProvider = new MockSkitterProvider();
+        AuthToken token = skitterProvider.authenticate("user1", Utils.hashPassword("password1"));
+        List<Skeet> skeets = skitterProvider.getSkeets(token, 0);
+        long lastSkeetTimestamp = skeets.get(0).getTimestamp();
+
+        // Act
+        List<Skeet> newSkeets = skitterProvider.getSkeets(token, lastSkeetTimestamp);
+
+        // Assert
+        assertNotNull(newSkeets);
+        assertEquals(0, newSkeets.size());
+    }
+
+    /**
+     * Post a skeet
+     **/
+    public void testPostSkeet() throws Exception {
+        // Arrange
+        MockSkitterProvider skitterProvider = new MockSkitterProvider();
+        AuthToken token = skitterProvider.authenticate("user1", Utils.hashPassword("password1"));
+        String expectedMessage = "This is a test message";
+
+        // Act
+        skitterProvider.post(token, new Skeet(expectedMessage));
+        List<Skeet> skeets = skitterProvider.getSkeets(token, 0);
+
+        // Assert
+        assertNotNull(skeets);
+        assertEquals(16, skeets.size());
+        assertEquals(expectedMessage, skeets.get(0).getText());
     }
 };

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.ArrayList;
 import com.psyndicate.skitter.Utils;
 
 public class MockSkitterProvider implements SkitterProvider {
@@ -12,26 +15,39 @@ public class MockSkitterProvider implements SkitterProvider {
         public String username;
         public byte[] passwordHash;
         public long userId;
+        public SortedSet<Skeet> skeets = new TreeSet<Skeet>();
     };
 
     private Map<String, UserInfo> userDatabase = new HashMap<String, UserInfo>();
+    private Map<Long, UserInfo> tokens = new HashMap<Long, UserInfo>();
 
     public MockSkitterProvider() {
         seedUserDatabase();
     }
 
     private void seedUserDatabase() {
+        int baseTime = 1452355797 * 1000; // Time when I wrote this code.
         try {
             UserInfo user1 = new UserInfo();
             user1.username = "user1";
             user1.passwordHash = Utils.hashPassword("password1");
             user1.userId = 1;
+            for(int x = 0; x < 15; x++) {
+                user1.skeets.add(new Skeet(
+                            String.format("This is skeet message %d for user 1", x), 
+                            baseTime + x * 1000 * 60));
+            }
             userDatabase.put(user1.username, user1);
 
             UserInfo user2 = new UserInfo();
             user2.username = "user2";
             user2.passwordHash = Utils.hashPassword("password2");
             user2.userId = 2;
+            for(int x = 0; x < 25; x++) {
+                user2.skeets.add(new Skeet(
+                            String.format("This is skeet message %d for user 2", x),
+                            baseTime + x * 1000 * 60));
+            }
             userDatabase.put(user2.username, user2);
         }
         catch(Exception ex) {
@@ -56,25 +72,38 @@ public class MockSkitterProvider implements SkitterProvider {
         token.userId = info.userId;
         // Token is valid for an hour
         token.validToTimestamp = System.currentTimeMillis() + 1000 * 60 * 60 * 1;
+        tokens.put(token.tokenId, info);
         return token;
+    }
+
+    private UserInfo checkToken(AuthToken token) throws SkitterException {
+        if((token == null) ||
+           !token.isValid() ||
+           !tokens.containsKey(token.tokenId)) {
+            throw new SkitterException("Authentication token is invalid.");
+        }
+
+        return tokens.get(token.tokenId);
     }
 
     /**
      * Get a list of skeets for this user.
      **/
-    public List<Skeet> getSkeets(AuthToken auth, long timestampStart) throws SkitterException {
-        // TODO
+    public List<Skeet> getSkeets(AuthToken token, long timestampStart) throws SkitterException {
         mockNetworkDelay();
-        throw new SkitterException("Not implemented.");
+        UserInfo info = checkToken(token);
+        Skeet lastSeenSkeet = new Skeet();
+        lastSeenSkeet.setTimestamp(timestampStart);
+        return new ArrayList<Skeet>(info.skeets.headSet(lastSeenSkeet));
     }
 
     /**
      * Post a skeet.
      **/
     public void post(AuthToken token, Skeet skeet) throws SkitterException {
-        // TODO
         mockNetworkDelay();
-        throw new SkitterException("Not implemented.");
+        UserInfo info = checkToken(token);
+        info.skeets.add(skeet);
     }
 
     /**

@@ -1,12 +1,14 @@
 package com.psyndicate.skitter.model;
 
 public class AuthToken {
-    public long validToTimestamp;
-    public long userId;
-    public long tokenId;
+    public long validToTimestamp = -1;
+    public long userId = -1;
+    public long tokenId = -1;
 
     public boolean isValid() {
-        return validToTimestamp > System.currentTimeMillis();
+        return ((validToTimestamp > System.currentTimeMillis()) &&
+                (userId != -1) &&
+                (tokenId != -1));
     }
 };
 
