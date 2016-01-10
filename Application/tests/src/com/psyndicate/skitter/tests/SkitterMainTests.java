@@ -14,6 +14,7 @@ public class SkitterMainTests extends ActivityInstrumentationTestCase2<SkitterMa
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        setActivityInitialTouchMode(true);
         skitterMainActivity = getActivity();
     }
 

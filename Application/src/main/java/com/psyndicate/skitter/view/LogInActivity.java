@@ -23,12 +23,10 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.log_in_activity)
 public class LogInActivity extends RoboActivity {
     private static final String TAG = "LogInActivity";
-    private static final int REQUEST_SIGNUP = 0;
 
     @InjectView(R.id.user_name_edit)    EditText usernameEditText;
     @InjectView(R.id.password_edit)     EditText passwordEditText;
     @InjectView(R.id.login_button)      Button loginButton;
-    @InjectView(R.id.signup_link)       TextView signupLink;
 
     @Inject
     SkitterApp skitterApp;
