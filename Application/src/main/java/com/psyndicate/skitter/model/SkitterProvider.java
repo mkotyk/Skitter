@@ -1,7 +1,10 @@
 package com.psyndicate.skitter.model;
 
+import com.google.inject.ImplementedBy;
+
 import java.util.List;
 
+@ImplementedBy(MockSkitterProvider.class)
 public interface SkitterProvider {
 
     /**
@@ -18,5 +21,5 @@ public interface SkitterProvider {
      * Post a skeet.
      **/
     void post(AuthToken token, Skeet skeet) throws SkitterException;
-};
+}
 

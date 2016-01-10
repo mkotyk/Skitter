@@ -20,8 +20,4 @@ public class SkitterMainTests extends ActivityInstrumentationTestCase2<SkitterMa
     public void testPreconditions() {
         assertNotNull("skitterMainActivity is null", skitterMainActivity);
     }
-
-    public void testHappy() {
-        assertTrue(skitterMainActivity.isHappy());
-    }
 }

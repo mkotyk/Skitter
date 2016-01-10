@@ -7,26 +7,30 @@ import java.util.HashMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.ArrayList;
+
 import com.psyndicate.skitter.Utils;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class MockSkitterProvider implements SkitterProvider {
 
     private class UserInfo {
         public String username;
         public byte[] passwordHash;
         public long userId;
-        public SortedSet<Skeet> skeets = new TreeSet<Skeet>();
-    };
+        public SortedSet<Skeet> skeets = new TreeSet<>();
+    }
 
-    private Map<String, UserInfo> userDatabase = new HashMap<String, UserInfo>();
-    private Map<Long, UserInfo> tokens = new HashMap<Long, UserInfo>();
+    private Map<String, UserInfo> userDatabase = new HashMap<>();
+    private Map<Long, UserInfo> tokens = new HashMap<>();
 
     public MockSkitterProvider() {
         seedUserDatabase();
     }
 
     private void seedUserDatabase() {
-        int baseTime = 1452355797 * 1000; // Time when I wrote this code.
+        long baseTime = 1452355797L * 1000L; // Time when I wrote this code.
         try {
             UserInfo user1 = new UserInfo();
             user1.username = "user1";
@@ -71,7 +75,7 @@ public class MockSkitterProvider implements SkitterProvider {
         token.tokenId = (long)(Math.random() * Long.MAX_VALUE);
         token.userId = info.userId;
         // Token is valid for an hour
-        token.validToTimestamp = System.currentTimeMillis() + 1000 * 60 * 60 * 1;
+        token.validToTimestamp = System.currentTimeMillis() + 1000 * 60 * 60;
         tokens.put(token.tokenId, info);
         return token;
     }
@@ -94,7 +98,7 @@ public class MockSkitterProvider implements SkitterProvider {
         UserInfo info = checkToken(token);
         Skeet lastSeenSkeet = new Skeet();
         lastSeenSkeet.setTimestamp(timestampStart);
-        return new ArrayList<Skeet>(info.skeets.headSet(lastSeenSkeet));
+        return new ArrayList<>(info.skeets.headSet(lastSeenSkeet));
     }
 
     /**
@@ -116,4 +120,4 @@ public class MockSkitterProvider implements SkitterProvider {
         catch(InterruptedException ex) {
         }
     }
-};
+}

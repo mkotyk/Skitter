@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="fill_parent"
     android:orientation="vertical">
-    <TextView android:id="@+id/greeting"
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/skeet_list"
+        android:layout_gravity="top"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/post_label"
+        android:id="@+id/post_label"
+        android:paddingTop="24dp" />
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_world"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/post_edit"
+        android:layout_gravity="center_horizontal|bottom"
+        android:minLines="2"
+        android:maxLines="2"
+        android:gravity="bottom" />
+
 </LinearLayout>
 
 
