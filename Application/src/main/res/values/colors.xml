@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="solid_white">#ffffffff</color>
+    <color name="solid_black">#ff000000</color>
+    <color name="hashtag">#ff6c71c4</color>
+    <color name="mention">#ff268bd2</color>
 </resources>

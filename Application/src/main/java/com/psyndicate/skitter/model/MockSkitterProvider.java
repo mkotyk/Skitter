@@ -38,7 +38,8 @@ public class MockSkitterProvider implements SkitterProvider {
             user1.userId = 1;
             for(int x = 0; x < 15; x++) {
                 user1.skeets.add(new Skeet(
-                            String.format("This is skeet message %d for user 1", x), 
+                            user1.username,
+                            String.format("This is skeet message %d for user 1.  Hi @user1 and #tag", x),
                             baseTime + x * 1000 * 60));
             }
             userDatabase.put(user1.username, user1);
@@ -49,7 +50,8 @@ public class MockSkitterProvider implements SkitterProvider {
             user2.userId = 2;
             for(int x = 0; x < 25; x++) {
                 user2.skeets.add(new Skeet(
-                            String.format("This is skeet message %d for user 2", x),
+                            user2.username,
+                            String.format("This is skeet message %d for user 2.  Hi @user1 and #tag", x),
                             baseTime + x * 1000 * 60));
             }
             userDatabase.put(user2.username, user2);

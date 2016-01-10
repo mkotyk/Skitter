@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.psyndicate.skitter.R;
-import com.psyndicate.skitter.SkitterApp;
+import com.psyndicate.skitter.controller.SkitterApp;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;

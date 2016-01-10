@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:clickable="false"
+    android:padding="5dp"
+    android:background="@drawable/rounded_corner">
+
+
+    <TextView
+        android:id="@+id/skeet_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:text="Tweet text @user2 check out my #winning"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/skeet_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/skeet_text"
+        android:gravity="bottom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="user1"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/skeet_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/skeet_text"
+        android:gravity="bottom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="2 days ago"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

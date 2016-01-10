@@ -22,6 +22,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'org.roboguice:roboguice:2.0'
     testCompile 'junit:junit:4.12'
+    compile 'org.ocpsoft.prettytime:prettytime:3.1.0.Final'
 }
 
 List<String> dirs = [
