@@ -24,14 +24,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26a723ad-6976-4b77-9109-9566e9bcd8cd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/tests/src/com/psyndicate/skitter/tests/LogInTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Application.iml" afterPath="$PROJECT_DIR$/Application/Application.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/src/main/java/com/psyndicate/skitter/view/LogInActivity.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/psyndicate/skitter/view/LogInActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/tests/src/com/psyndicate/skitter/tests/SkitterMainTests.java" afterPath="$PROJECT_DIR$/Application/tests/src/com/psyndicate/skitter/tests/SkitterMainTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/build.gradle" afterPath="$PROJECT_DIR$/Application/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="26a723ad-6976-4b77-9109-9566e9bcd8cd" name="Default" comment="" />
     <ignored path="Skitter.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,8 +82,8 @@
       <file leaf-file-name="SkitterMainTests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/tests/src/com/psyndicate/skitter/tests/SkitterMainTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56666666">
-              <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.53333336">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#311#312#0" expanded="true" />
@@ -1967,16 +1960,22 @@
       <option name="project" value="LOCAL" />
       <updated>1452393160331</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Integration Test for LogInActivity.">
+      <created>1452446183316</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1452446183316</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1679" y="27" width="1682" height="1024" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290398" sideWeight="0.48527607" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290398" sideWeight="0.48527607" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290398" sideWeight="0.48527607" order="0" side_tool="false" content_ui="tabs" />
@@ -2019,7 +2018,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created a basic log in activity and added injection.  Tests coming shortly." />
-    <option name="LAST_COMMIT_MESSAGE" value="Created a basic log in activity and added injection.  Tests coming shortly." />
+    <MESSAGE value="Added Integration Test for LogInActivity." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Integration Test for LogInActivity." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2071,6 +2071,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2155,8 +2156,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/tests/src/com/psyndicate/skitter/tests/SkitterMainTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56666666">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.53333336">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#311#312#0" expanded="true" />
