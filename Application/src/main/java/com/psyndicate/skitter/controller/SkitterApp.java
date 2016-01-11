@@ -1,8 +1,11 @@
 package com.psyndicate.skitter.controller;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.psyndicate.skitter.Utils;
 import com.psyndicate.skitter.model.AuthToken;
@@ -13,6 +16,7 @@ import com.psyndicate.skitter.model.SkitterProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Main Skitter Application
  */
@@ -20,9 +24,22 @@ import java.util.List;
 public class SkitterApp {
     private static final String TAG = "SkitterApp";
     private AuthToken token = null;
+    private SkitterDbHelper skitterDbHelper; // Lazy created
+
+    private SkitterProvider skitterProvider;
+    private Context context;
 
     @Inject
-    SkitterProvider skitterProvider;
+    public SkitterApp(Context context, SkitterProvider skitterProvider) {
+        this.context = context;
+        this.skitterProvider = skitterProvider;
+    }
+
+    private SkitterDbHelper getSkitterDbHelper() {
+        if(skitterDbHelper == null)
+            skitterDbHelper = new SkitterDbHelper(this.context);
+        return skitterDbHelper;
+    }
 
     public boolean login(String username, String password) {
         try {
@@ -36,14 +53,18 @@ public class SkitterApp {
 
     public List<Skeet> getSkeets() {
         List<Skeet> skeets = new ArrayList<>();
-
-        // TODO: Query old skeets from device db
-
         long lastSeenSkeet = 0;
+
+        // Query old skeets from device db
+        skeets = getSkitterDbHelper().querySeenSkeetsDb();
+        if(skeets.size() > 0)
+            lastSeenSkeet = skeets.get(0).getTimestamp();
 
         if(isAuthenticated()) {
             try {
-                skeets.addAll(skitterProvider.getSkeets(token, lastSeenSkeet));
+                List<Skeet> newSkeets = skitterProvider.getSkeets(token, lastSeenSkeet);
+                getSkitterDbHelper().addNewSkeetsToDb(newSkeets);
+                skeets.addAll(newSkeets);
             }
             catch(SkitterException ex) {
                 // Present this to the user?
