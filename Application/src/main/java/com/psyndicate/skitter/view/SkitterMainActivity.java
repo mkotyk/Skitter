@@ -3,7 +3,9 @@ package com.psyndicate.skitter.view;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.inject.Inject;
@@ -23,6 +25,7 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.skitter_main_activity)
 public class SkitterMainActivity extends RoboActivity {
     @InjectView(R.id.skeet_list)    ListView skeetList;
+    @InjectView(R.id.post_activity_button)  Button postActivityButton;
     @Inject SkitterApp skitterApp;
     private ArrayAdapter<Skeet> skeetArrayAdapter;
 
@@ -33,6 +36,14 @@ public class SkitterMainActivity extends RoboActivity {
         skeetArrayAdapter =  new SkeetArrayAdapter(SkitterMainActivity.this,
                 R.layout.skeet_view);
         skeetList.setAdapter(skeetArrayAdapter);
+
+        postActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SkitterMainActivity.this, PostSkeetActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // If we have no valid log in, present the log in screen
         if(!skitterApp.isAuthenticated()) {

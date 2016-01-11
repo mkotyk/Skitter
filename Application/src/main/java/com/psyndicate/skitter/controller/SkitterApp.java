@@ -56,4 +56,17 @@ public class SkitterApp {
     public boolean isAuthenticated() {
         return ((token != null) && token.isValid());
     }
+
+    public Boolean post(String message) {
+        if(isAuthenticated()) {
+            try {
+                skitterProvider.post(token, new Skeet(message));
+                return true;
+            }
+            catch(SkitterException ex) {
+                Log.e(TAG, "Unable to post skeet", ex);
+            }
+        }
+        return false;
+    }
 }

@@ -36,7 +36,6 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         try {
-            Skeet item = getItem(position);
             View v;
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,11 +48,17 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
             TextView skeetTimestamp = (TextView) v.findViewById(R.id.skeet_timestamp);
             ImageView skeetImage = (ImageView) v.findViewById(R.id.skeet_image);
 
+            Skeet item = getItem(position);
+            if (item == null) {
+                Log.e(TAG, "Skeet item is null!");
+                return v;
+            }
+
             skeetText.setText(createRichText(item.getText()), TextView.BufferType.SPANNABLE);
             skeetTimestamp.setText(prettyTime.format(new Date(item.getTimestamp())));
 
             // This is just for fake purposes - if this were real, I'd have bitmap images in the skeets
-            if(item.getPoster().equals("user1")) {
+            if((item.getPoster() != null) && item.getPoster().equals("user1")) {
                 skeetImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.good_guy_greg));
             } else {
                 skeetImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.good_girl_gina));
@@ -85,6 +90,7 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
     }
 
     public SpannableString createRichText(String skeet) {
+        assert(skeet != null);
         SpannableString spannableString = new SpannableString(skeet);
 
         int start_span = -1;

@@ -8,5 +8,8 @@
     <string name="authenticating">Authenticating...</string>
     <string name="login_failed">Login Failed</string>
     <string name="post_label">Post Something</string>
+    <string name="posting">Posting...</string>
+    <string name="post_failed">Post Failed</string>
+    <string name="post">Post</string>
 </resources>
 

@@ -12,39 +12,12 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="6dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/post_label"
-        android:id="@+id/post_label"
-        android:paddingTop="24dp" />
-
-    <LinearLayout
+    <Button
+        android:id="@+id/post_activity_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="6dip">
-
-        <EditText
-            android:id="@+id/post_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minLines="2"
-            android:maxLines="2" />
-
-        <Button
-            android:id="@+id/post_button"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="0"
-            android:text="Post"/>
-
-
-
-    </LinearLayout>
-
+        android:layout_weight="0"
+        android:text="@string/post"/>
 
 </LinearLayout>
 

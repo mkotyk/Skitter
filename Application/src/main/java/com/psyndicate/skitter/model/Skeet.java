@@ -4,7 +4,7 @@ package com.psyndicate.skitter.model;
   * Model of a single Skeet message
   **/
 public class Skeet implements Comparable {
-    public static int MAX_SKEET_LENGTH = 160;
+    public static int MAX_SKEET_LENGTH = 140;
 
     private String poster;
     private String text;

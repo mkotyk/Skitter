@@ -11,5 +11,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.LogInActivity" />
+        <activity android:name=".view.PostSkeetActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 </manifest>

@@ -108,7 +108,11 @@ public class MockSkitterProvider implements SkitterProvider {
      **/
     public void post(AuthToken token, Skeet skeet) throws SkitterException {
         mockNetworkDelay();
+        if((skeet.getText() == null) || (skeet.getText().length() == 0))
+            throw new SkitterException("Invalid skeet message");
         UserInfo info = checkToken(token);
+        skeet.setPoster(info.username);
+        skeet.setTimestamp(System.currentTimeMillis());
         info.skeets.add(skeet);
     }
 
