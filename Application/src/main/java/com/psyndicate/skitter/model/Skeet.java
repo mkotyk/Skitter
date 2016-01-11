@@ -62,5 +62,5 @@ public class Skeet implements Comparable {
     public String getPoster() {
      return this.poster;
     }
-};
+}
 

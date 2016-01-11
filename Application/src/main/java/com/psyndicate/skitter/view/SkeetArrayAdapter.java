@@ -1,7 +1,6 @@
 package com.psyndicate.skitter.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -9,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.psyndicate.skitter.R;
@@ -47,9 +47,17 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
 
             TextView skeetText = (TextView) v.findViewById(R.id.skeet_text);
             TextView skeetTimestamp = (TextView) v.findViewById(R.id.skeet_timestamp);
+            ImageView skeetImage = (ImageView) v.findViewById(R.id.skeet_image);
 
             skeetText.setText(createRichText(item.getText()), TextView.BufferType.SPANNABLE);
             skeetTimestamp.setText(prettyTime.format(new Date(item.getTimestamp())));
+
+            // This is just for fake purposes - if this were real, I'd have bitmap images in the skeets
+            if(item.getPoster().equals("user1")) {
+                skeetImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.good_guy_greg));
+            } else {
+                skeetImage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.good_girl_gina));
+            }
 
             return v;
         } catch (Exception ex) {
@@ -57,10 +65,10 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
             return null;
         }
     }
-    enum span_type { NONE, HASHTAG, MENTION };
+    enum span_type { NONE, HASHTAG, MENTION }
 
     private void addSpan(SpannableString spannableString, int startSpan, int endSpan, span_type st) {
-        int color = Color.BLACK;
+        int color;
         switch(st) {
             case NONE:
                 return;
@@ -80,7 +88,7 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
         SpannableString spannableString = new SpannableString(skeet);
 
         int start_span = -1;
-        int end_span = -1;
+        int end_span;
         span_type st = span_type.NONE;
         for(int index = 0; index < skeet.length(); index++) {
             switch (skeet.charAt(index)) {

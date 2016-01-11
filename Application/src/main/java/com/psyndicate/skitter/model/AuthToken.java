@@ -10,5 +10,5 @@ public class AuthToken {
                 (userId != -1) &&
                 (tokenId != -1));
     }
-};
+}
 

@@ -16,4 +16,4 @@ public class SkitterException extends Exception {
     public SkitterException(Throwable cause) {
         super(cause);
     }
-};
+}
