@@ -54,6 +54,12 @@ public class SkitterMainActivity extends RoboActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Refresh
+        loadSkeets();
+    }
+
     public void loadSkeets() {
         // Need to run network tasks on another thread, and the follow up UI tasks
         // back on the UI thread
@@ -66,6 +72,7 @@ public class SkitterMainActivity extends RoboActivity {
 
             @Override
             protected void onPostExecute(List<Skeet> skeets) {
+                skeetArrayAdapter.clear();
                 skeetArrayAdapter.addAll(skeets);
             }
         }.execute();

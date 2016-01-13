@@ -78,7 +78,7 @@ public class SkitterDbHelper extends SQLiteOpenHelper {
                                 null, // Selection args
                                 null, // Group by
                                 null, // Having
-                                SkeetDef.COLUMN_NAME_TIMESTAMP + "DESC", // Order By
+                                SkeetDef.COLUMN_NAME_TIMESTAMP + " DESC", // Order By
                                 "100"); // Limit
 
         while(cursor.moveToNext()) {

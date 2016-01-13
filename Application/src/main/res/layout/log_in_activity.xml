@@ -6,14 +6,13 @@
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
         android:id="@+id/logo_image"
         android:layout_gravity="center_horizontal"
-        android:minHeight="100dp"
+        android:scaleType="fitCenter"
         android:layout_marginBottom="24dp"
-        android:src="@mipmap/skitter_logo" />
-
+        android:src="@drawable/skitter_logo" />
 
     <TextView
         android:layout_width="wrap_content"

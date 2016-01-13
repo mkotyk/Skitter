@@ -4,6 +4,7 @@
     <application android:label="@string/skitter_app"
         android:allowBackup="true"
         android:icon="@mipmap/skitter_logo">
+        android:theme="@style/AppTheme" >
         <activity android:name=".view.SkitterMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

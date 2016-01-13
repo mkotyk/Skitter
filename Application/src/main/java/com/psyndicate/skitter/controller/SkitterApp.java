@@ -15,6 +15,7 @@ import com.psyndicate.skitter.model.SkitterProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 
 /**
@@ -52,13 +53,14 @@ public class SkitterApp {
     }
 
     public List<Skeet> getSkeets() {
-        List<Skeet> skeets = new ArrayList<>();
+        // Tree set to keep them sorted chronologically
+        TreeSet<Skeet> skeets = new TreeSet<>();
         long lastSeenSkeet = 0;
 
         // Query old skeets from device db
-        skeets = getSkitterDbHelper().querySeenSkeetsDb();
+        skeets.addAll(getSkitterDbHelper().querySeenSkeetsDb());
         if(skeets.size() > 0)
-            lastSeenSkeet = skeets.get(0).getTimestamp();
+            lastSeenSkeet = skeets.first().getTimestamp();
 
         if(isAuthenticated()) {
             try {
@@ -71,7 +73,7 @@ public class SkitterApp {
                 Log.e(TAG, "Unable to get new skeets", ex);
             }
         }
-        return skeets;
+        return new ArrayList<>(skeets);
     }
 
     public boolean isAuthenticated() {
