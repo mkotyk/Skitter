@@ -3,16 +3,18 @@
           package="com.psyndicate.skitter">
     <application android:label="@string/skitter_app"
         android:allowBackup="true"
-        android:icon="@mipmap/skitter_logo">
-        android:theme="@style/AppTheme" >
+        android:icon="@mipmap/skitter_logo"
+        android:theme="@style/AppTheme.Dark" >
         <activity android:name=".view.SkitterMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LogInActivity" />
+        <activity android:name=".view.LogInActivity"
+            android:theme="@style/AppTheme.Dark"/>
         <activity android:name=".view.PostSkeetActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:theme="@style/AppTheme.Dark"/>
     </application>
 </manifest>

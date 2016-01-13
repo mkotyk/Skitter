@@ -9,10 +9,11 @@
         android:id="@+id/skeet_list"
         android:layout_gravity="top"
         android:layout_weight="1"
+        android:background="@color/primary"
         android:divider="@android:color/transparent"
         android:dividerHeight="6dp" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/post_activity_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
