@@ -26,8 +26,11 @@ import roboguice.inject.InjectView;
 public class SkitterMainActivity extends RoboActivity {
     @InjectView(R.id.skeet_list)    ListView skeetList;
     @InjectView(R.id.post_activity_button)  Button postActivityButton;
-    @Inject SkitterApp skitterApp;
     private ArrayAdapter<Skeet> skeetArrayAdapter;
+
+    public SkitterApp getSkitterApp() {
+        return (SkitterApp) this.getApplication();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class SkitterMainActivity extends RoboActivity {
         });
 
         // If we have no valid log in, present the log in screen
-        if(!skitterApp.isAuthenticated()) {
+        if(!getSkitterApp().isAuthenticated()) {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         } else {
@@ -67,7 +70,7 @@ public class SkitterMainActivity extends RoboActivity {
 
             @Override
             protected List<Skeet> doInBackground(Void... strings) {
-                return skitterApp.getSkeets();
+                return getSkitterApp().getSkeets();
             }
 
             @Override

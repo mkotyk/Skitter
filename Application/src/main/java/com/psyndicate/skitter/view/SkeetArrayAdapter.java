@@ -97,41 +97,36 @@ public class SkeetArrayAdapter extends ArrayAdapter<Skeet> {
         int end_span;
         span_type st = span_type.NONE;
         for(int index = 0; index < skeet.length(); index++) {
-            switch (skeet.charAt(index)) {
-                case '#':
-                    if (st != span_type.NONE) {
-                        end_span = index;
-                        addSpan(spannableString, start_span, end_span, st);
-                    }
-                    start_span = index;
-                    st = span_type.HASHTAG;
-                    break;
-                case '@':
-                    if (st != span_type.NONE) {
-                        end_span = index;
-                        addSpan(spannableString, start_span, end_span, st);
-                    }
-                    start_span = index;
-                    st = span_type.MENTION;
-                    break;
-                case ' ':
-                case '\t':
-                case '\r':
-                case '\n':
-                    if (st != span_type.NONE) {
-                        end_span = index;
-                        addSpan(spannableString, start_span, end_span, st);
-                    }
-                    start_span = -1;
-                    st = span_type.NONE;
-                    break;
+            char c = skeet.charAt(index);
+            if(c == '#') {
+                if (st != span_type.NONE) {
+                    end_span = index;
+                    addSpan(spannableString, start_span, end_span, st);
+                }
+                start_span = index;
+                st = span_type.HASHTAG;
+            }
+            else if (c == '@') {
+                if (st != span_type.NONE) {
+                    end_span = index;
+                    addSpan(spannableString, start_span, end_span, st);
+                }
+                start_span = index;
+                st = span_type.MENTION;
+            }
+            else if (!Character.isLetterOrDigit(c) || c == '_') {
+                if (st != span_type.NONE) {
+                    end_span = index;
+                    addSpan(spannableString, start_span, end_span, st);
+                }
+                start_span = -1;
+                st = span_type.NONE;
             }
         }
         if (st != span_type.NONE) {
             end_span = skeet.length();
             addSpan(spannableString, start_span, end_span, st);
         }
-
 
         return spannableString;
     }

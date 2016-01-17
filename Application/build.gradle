@@ -22,8 +22,13 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'org.roboguice:roboguice:2.0'
-    testCompile 'junit:junit:4.12'
     compile 'org.ocpsoft.prettytime:prettytime:3.1.0.Final'
+
+    testCompile 'junit:junit:4.12'
+
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.3'
+    androidTestCompile 'com.android.support.test:rules:0.3'
 }
 
 List<String> dirs = [
@@ -34,8 +39,9 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 8
         targetSdkVersion 22
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
         abortOnError false

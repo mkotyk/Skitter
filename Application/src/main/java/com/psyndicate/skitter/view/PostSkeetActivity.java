@@ -36,8 +36,9 @@ public class PostSkeetActivity extends RoboActivity {
     @InjectView(R.id.post_remaining_text)
     TextView postRemainingText;
 
-    @Inject
-    SkitterApp skitterApp;
+    public SkitterApp getSkitterApp() {
+        return (SkitterApp) this.getApplication();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class PostSkeetActivity extends RoboActivity {
 
             @Override
             protected Boolean doInBackground(String... strings) {
-                return skitterApp.post(strings[0]);
+                return getSkitterApp().post(strings[0]);
             }
 
             @Override

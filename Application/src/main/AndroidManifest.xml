@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.psyndicate.skitter">
     <application android:label="@string/skitter_app"
+        android:name=".controller.SkitterApp"
         android:allowBackup="true"
         android:icon="@mipmap/skitter_logo"
         android:theme="@style/AppTheme.Dark" >

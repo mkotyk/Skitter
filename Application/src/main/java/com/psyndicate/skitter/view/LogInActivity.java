@@ -27,8 +27,9 @@ public class LogInActivity extends RoboActivity {
     @InjectView(R.id.password_edit)     EditText passwordEditText;
     @InjectView(R.id.login_button)      Button loginButton;
 
-    @Inject
-    SkitterApp skitterApp;
+    public SkitterApp getSkitterApp() {
+        return (SkitterApp) this.getApplication();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class LogInActivity extends RoboActivity {
 
             @Override
             protected Boolean doInBackground(Void... strings) {
-                return skitterApp.login(username, password);
+                return getSkitterApp().login(username, password);
             }
 
             @Override

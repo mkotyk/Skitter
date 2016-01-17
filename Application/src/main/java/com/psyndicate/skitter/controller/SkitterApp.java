@@ -1,12 +1,10 @@
 package com.psyndicate.skitter.controller;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.app.Application;
 import android.util.Log;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
+import com.psyndicate.skitter.SkitterModule;
 import com.psyndicate.skitter.Utils;
 import com.psyndicate.skitter.model.AuthToken;
 import com.psyndicate.skitter.model.Skeet;
@@ -17,28 +15,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
+import roboguice.RoboGuice;
+
 
 /**
  * Main Skitter Application
  */
-@Singleton
-public class SkitterApp {
+
+public class SkitterApp extends Application {
     private static final String TAG = "SkitterApp";
     private AuthToken token = null;
     private SkitterDbHelper skitterDbHelper; // Lazy created
 
-    private SkitterProvider skitterProvider;
-    private Context context;
-
     @Inject
-    public SkitterApp(Context context, SkitterProvider skitterProvider) {
-        this.context = context;
-        this.skitterProvider = skitterProvider;
+    private SkitterProvider skitterProvider;
+
+    public SkitterApp() {
+        super();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE,
+                RoboGuice.newDefaultRoboModule(this), new SkitterModule());
     }
 
     private SkitterDbHelper getSkitterDbHelper() {
         if(skitterDbHelper == null)
-            skitterDbHelper = new SkitterDbHelper(this.context);
+            skitterDbHelper = new SkitterDbHelper(this);
         return skitterDbHelper;
     }
 
