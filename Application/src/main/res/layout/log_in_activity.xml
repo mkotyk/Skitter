@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:layout_margin="50dp">
-
+    android:layout_margin="50dp"
+    android:gravity="center">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
         android:id="@+id/logo_image"
         android:layout_gravity="center_horizontal"
-        android:minHeight="100dp"
+        android:scaleType="fitCenter"
         android:layout_marginBottom="24dp"
-        android:src="@mipmap/skitter_logo" />
-
+        android:src="@drawable/skitter_logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_gravity="left"
         android:text="@string/user_name"
         android:id="@+id/user_name_label"/>
 
@@ -43,7 +44,7 @@
         android:layout_marginBottom="8dp"
         android:layout_gravity="fill_horizontal" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"

@@ -4,7 +4,7 @@ import com.google.inject.ImplementedBy;
 
 import java.util.List;
 
-@ImplementedBy(MockSkitterProvider.class)
+//@ImplementedBy(MockSkitterProvider.class) // - Let the module decide this
 public interface SkitterProvider {
 
     /**

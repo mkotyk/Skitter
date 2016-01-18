@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="hashtag">#cb4b16</color>
+    <color name="mention">#268bd2</color>
+
+    <color name="primary">#002b36</color>
+    <color name="primary_dark">#073642</color>
+    <color name="primary_darker">#586e75</color>
+    <color name="accent">#93a1a1</color>
+
+    <color name="black">#000000</color>
+    <color name="lt_gray">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
 </resources>

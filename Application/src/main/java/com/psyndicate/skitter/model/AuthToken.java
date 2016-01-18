@@ -6,9 +6,9 @@ public class AuthToken {
     public long tokenId = -1;
 
     public boolean isValid() {
-        return ((validToTimestamp > System.currentTimeMillis()) &&
+        return ((validToTimestamp >= System.currentTimeMillis()) &&
                 (userId != -1) &&
                 (tokenId != -1));
     }
-};
+}
 

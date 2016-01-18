@@ -16,4 +16,4 @@ public class Utils {
         md.update(password.getBytes("UTF-8"));
         return md.digest();
     }
-};
+}

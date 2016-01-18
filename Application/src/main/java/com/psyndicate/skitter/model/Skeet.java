@@ -4,8 +4,9 @@ package com.psyndicate.skitter.model;
   * Model of a single Skeet message
   **/
 public class Skeet implements Comparable {
-    public static int MAX_SKEET_LENGTH = 160;
+    public static int MAX_SKEET_LENGTH = 140;
 
+    private String poster;
     private String text;
     private long timestamp;
 
@@ -15,12 +16,13 @@ public class Skeet implements Comparable {
     }
 
     public Skeet(String text) {
-        this.text = text;
+        setText(text);
         this.timestamp = System.currentTimeMillis();
     }
 
-    public Skeet(String text, long timestamp) {
-        this.text = text;
+    public Skeet(String poster, String text, long timestamp) {
+        this.poster = poster;
+        setText(text);
         this.timestamp = timestamp;
     }
 
@@ -52,5 +54,13 @@ public class Skeet implements Comparable {
         Skeet otherSkeet = (Skeet) other;
         return (int)(otherSkeet.timestamp - this.timestamp);
     }
-};
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getPoster() {
+     return this.poster;
+    }
+}
 

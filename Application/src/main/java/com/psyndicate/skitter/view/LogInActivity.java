@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.psyndicate.skitter.R;
-import com.psyndicate.skitter.SkitterApp;
+import com.psyndicate.skitter.controller.SkitterApp;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -23,15 +22,14 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.log_in_activity)
 public class LogInActivity extends RoboActivity {
     private static final String TAG = "LogInActivity";
-    private static final int REQUEST_SIGNUP = 0;
 
     @InjectView(R.id.user_name_edit)    EditText usernameEditText;
     @InjectView(R.id.password_edit)     EditText passwordEditText;
     @InjectView(R.id.login_button)      Button loginButton;
-    @InjectView(R.id.signup_link)       TextView signupLink;
 
-    @Inject
-    SkitterApp skitterApp;
+    public SkitterApp getSkitterApp() {
+        return (SkitterApp) this.getApplication();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +72,7 @@ public class LogInActivity extends RoboActivity {
 
             @Override
             protected Boolean doInBackground(Void... strings) {
-                return skitterApp.login(username, password);
+                return getSkitterApp().login(username, password);
             }
 
             @Override
