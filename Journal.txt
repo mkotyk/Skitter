@@ -1,0 +1,161 @@
+Development Journal
+
+Day 0 - Thursday Jan, 7th 2016 [19:00-20:00] (1hr)
+
+- Installed android-sdk.
+    - Proceeded to install various version of android platform (23.x.x -> 19)
+    - Discovered I need to add the Google Repository to build any of the sample apps.
+    - Learned about gradle (smells like Maven)
+        ./gradlew build
+        ./gradlew tasks
+    - Installed openjdk-7-sdk on my Ubuntu set up.  Only had the JRE present.
+    - Sample complained about lint errors.  Added the following to the gradle config to bypass:
+                    lintOptions {
+                        abortOnError false
+                    }
+    - Sample compiled.
+    - Get adb to see my phone
+        - Secret to enter developer mode.  Settings->About->Tap Build Number 7 times.
+        - USB Debugging option turned on
+        - ADB now sees my device
+    - Tried ./gradlew installDebug again and it uploaded to my device
+    - Launched the app on my device and it worked
+
+
+Day 1 - Friday Jan, 8th 2016 [18:45-21:45] (3hr)
+
+- Read up on various android topic
+    - Activities
+    - Fragments
+    - Views
+    - Widgets
+    - Intents
+    - Threads (in particular UI thread)
+    - roboGuice injection
+- Tried out Android Studio
+    - The wysiwyg XML editor was neat, but I would imagine that in no time,
+    layout by hand would be better.  When I was big into Swing I could layout a
+    whole window in my head and just type it out in code.
+- Picked a name.  "Skitter", like when a cat goes around a corner too quickly.
+- Git init
+- Created a feature branch to bootstrap
+- Using Platform/sample/legacy/SkeletonApp as a template to create the project
+    (basically the same thing an IDE would do for you)
+- FYI, my environment is Ubuntu 14, zsh, vim with lots of plugins, tmux.  I'm not
+   anti IDE by any means, but for learning exercises, being able to do it "from scratch"
+   is important.
+- Deviating from SkeletonApp.. looks like it's quite an old sample.  Going to reference some
+  of the newer apps (API 23) for project layout.  Gradle seems to have the same basic
+  code layout structure as maven which I'm quite familiar with.
+- Doing a test build.  Having trouble with the resources not compiling.  Off to google it.
+    - Stack overflow to the rescue.  Needed to import R because I put my view in a sub-package from
+      the rest of the app.  Build successful.
+- Tried to launch the emulator (emulating a Nexus S).. didn't get any boot up or video.
+- Deployed my Skeleton skitter app to my phone, and it works.
+- Added a TextView and a resource string for Hello, World
+[20:18-20:30] break
+- Going to figure out how to get roboGuice added to gradle, in order to take advantage of Injection
+   - Was pretty easy, 1 line change
+- Making sure unit tests can build and run
+- Not convinved my tests are running.  Going to make one fail.
+   - Learned the differences from standard unit tests and connected Android tests.
+   - Going to add some unit tests
+   - Added unit tests and verified by making one fail
+- At this point, I'm relatively happy with the skeleton of the project.  It has some 3rd party libraries,
+   unit tests and integration (Android Tests).  The app loads and displays Hello, World!
+- Committing and Merging
+    - Adding .gradle and build/** to .gitignore
+    - Created github project for Skitter
+    - Added a simple readme markdown
+    - Pushed the project up to github
+[21:45] It's been a long day and quality is dropping.  Time to pack it up.
+
+Day 2 - Saturday Jan, 9th 2016 [08:00-22:15] (8.5h)
+
+- Today I want to define the models and interfaces, create the log in screen, and show the list of tweets
+    - Defining the models/interfaces early is important because it allows developers
+      to work in parallel relying on the model as a contract.  It's also better to test and solve
+      any issues with the model early, as they are usually the hardest to change later
+      (ie many to one relationship etc).
+- Plugging away as implementing the models, interfaces and a mock provider.
+    This is all basic Java and JUnit so nothing too unexpected yet.
+[10:00-10:30] break
+- Implemented the rest of the mock provider and unit tests
+[11:30-12:46] lunch break
+- Next thing to do is work on the log in activity.
+- Started looking at laying out the log in activity by hand.  This is daunting without
+  having all the verbage (component names, properties, layout names etc).
+- Installed and fired up Android Studio to develop the relation between layout and the
+  XML used to describe the layout.  Like I said.. Nothing against IDEs, but I want to know
+  what it's doing to the code/project under the hood.
+[14:10-18:45] Spending time with the family
+- Back to the log in activity.  I think I have a sane basic layout.  Tried previewing it in a few different
+   devices and aspect ratios.
+- Autocomplete of the IDE is handy, and surprisingly responsive compared to the ol' days of NetBeans.
+- Started laying out the main activity which will view the users skeets and allow posting.
+- Log in activity is pretty much implemented but needs integration tests written.
+- Decided to give the app a try on my ancient Asus Transformer tablet.
+   - Eventually got it working.  Installation of SuperUser had messed up a directory on the device
+        /data/local/tmp pointed was a symlink to a non-existant memory block device.  Deleted the link and made a directory.
+   - Looked okay.  Login fields were a bit wide.
+- Quite impressed with Android Studio (IntelliJ).  Will probably continue to use it, as I feel it is
+   acellerating me, without much voo-doo magic happening behind the scenes.
+- Goal for tomorrow is to wire up the Get Skeets and Post Skeet.
+[22:10] Packing it in
+
+Day 3 - Sunday Jan, 10th 2016 [11:30-22:23] (7.25h)
+- Going to start by writing Integration test for the Log In Activity
+    - http://developer.android.com/training/testing.html
+    - Wow. You could spend your whole life writing tests for every property of every component.
+    - Just added some basic sanity test to log in.
+- Switching to the main activity of viewing and posting messages.
+[12:46-13:30] Lunch
+- Have a basic ArrayAdapter made, and the skeets are being listed very plainly.  Memories of Swing and AWT are
+    coming back to me.
+- Exploring drawables and other tricks of the trade to make the skeet ListView look like a modern app.
+- Comparing various twitter apps out there.  Some common ideas:
+    - Picture in the list item
+    - Rich text for mentions, tags and hyperlinks
+    - Time as human readable text (ie just now, 7 minutes ago, etc .. not a hard ISO date)
+    - Dedicated activity for posting.  This is important since other apps might want to
+      launch that activity directly.
+    - Menu launcher on each tweet to reply, other actions (will leave out for my version)
+[16:00-19:00] break
+- I find myself fixated on improving quality of rendering.  I don't like releasing shabby looking
+  products.
+- API compatiblity levels is a complex thing.
+- Going to make a separate post activity.
+- Creating the post activity went fairly well.
+
+- The following core functionallity remains:
+    - Saving previously seen messages to local storage
+- Trying to cram in SQLite persistence before going to bed. It's kind of working, with maybe a bug or two.
+- More testing and test writing required.
+[22:23] - Packing it in.
+
+Day 4 - Monday Jan, 11th 2016 (0h)
+  - Didn't get any work done.  Had other commitments.
+
+Day 5 - Tuesday Jan, 12th 2016 [19:00-22:00] (3h)
+  - Fixed some critical bugs
+  - Playing with theming and compnent styles
+  - Decided to try applying the solarized theme to my app
+
+Day 6 - Wednesday Jan, 13th 2016 [20:00-22:00] (2h)
+  - Decided to sort out my emulator issues.  Got the emulator working correctly now.
+
+Day 7 - Thursday Jan, 14th 2016 [20:00-22:00] (2h)
+  - Created a Skitter Application base instead of relying on injection for context.  This
+    makes for a much cleaner implementation.
+  - Expanding the Instrumented tests
+
+Day 8 - Friday Jan, 15th 2016 [19:30-22:00] (3.5h)
+   - Fighting with Instrumented testing.  Unable to get tests running reliably.
+
+Day 9 - Saturday Jan, 16th 2016 [scattered times] (3h)
+   - Managed to get tests working reliably by switching to JUnit4 runner.
+
+Day 10 - Sunday Jan, 17th 2016 (0h)
+    - Family obligations.
+
+Total hours: 35.25
